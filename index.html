@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bliss Atelier | Confeitaria Artesanal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bordeaux: #641F35;
+    --champagne: #E8D5B5;
+    --ivory: #F7F0E5;
+    --gold: #B58B53;
+    --chocolate: #38231F;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--ivory);
+    color: var(--chocolate);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.announcement {
+    background: var(--bordeaux);
+    color: var(--champagne);
+    padding: 12px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+header {
+    padding: 35px 20px;
+    text-align: center;
+}
+
+.monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 65px;
+    font-style: italic;
+    color: var(--bordeaux);
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    letter-spacing: 12px;
+    color: var(--bordeaux);
+}
+
+.atelier {
+    font-size: 12px;
+    letter-spacing: 8px;
+    color: var(--bordeaux);
+}
+
+.tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold);
+    margin-top: 15px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    border-top: 1px solid var(--champagne);
+    border-bottom: 1px solid var(--champagne);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--bordeaux);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.hero {
+    background: var(--bordeaux);
+    color: var(--ivory);
+    padding: 100px 25px;
+    text-align: center;
+}
+
+.hero span {
+    color: var(--champagne);
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 400;
+    max-width: 800px;
+    margin: 25px auto;
+}
+
+.hero p {
+    max-width: 550px;
+    margin: auto;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.button {
+    display: inline-block;
+    background: var(--champagne);
+    color: var(--bordeaux);
+    padding: 17px 30px;
+    margin-top: 30px;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background: var(--gold);
+    color: white;
+}
+
+section {
+    padding: 75px 25px;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--bordeaux);
+}
+
+.subtitle {
+    text-align: center;
+    margin: 15px auto 40px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.product {
+    background: #fffdf8;
+    border: 1px solid var(--champagne);
+    padding: 35px 25px;
+    text-align: center;
+}
+
+.product-image {
+    height: 180px;
+    background: var(--champagne);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 70px;
+    font-style: italic;
+    color: var(--bordeaux);
+    margin-bottom: 25px;
+}
+
+.product h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--bordeaux);
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.product p {
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+.price {
+    display: block;
+    color: var(--bordeaux);
+    font-size: 19px;
+    margin-top: 20px;
+}
+
+.about {
+    background: var(--champagne);
+    text-align: center;
+}
+
+.about p {
+    max-width: 650px;
+    margin: 20px auto;
+    line-height: 2;
+    font-size: 14px;
+}
+
+.orders {
+    text-align: center;
+}
+
+.orders p {
+    line-height: 2;
+    font-size: 14px;
+}
+
+footer {
+    background: var(--bordeaux);
+    color: var(--champagne);
+    padding: 45px 20px;
+    text-align: center;
+}
+
+footer h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 35px;
+    font-weight: 400;
+    letter-spacing: 5px;
+}
+
+footer p {
+    font-size: 12px;
+    line-height: 2;
+    margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 65px 20px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 38px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+    CONFEITARIA ARTESANAL • TAUBATÉ, SP
+</div>
+
+<header id="inicio">
+    <div class="monogram">B</div>
+    <div class="logo">BLISS</div>
+    <div class="atelier">ATELIER</div>
+    <div class="tagline">
+        Made with grace, shared with love.
+    </div>
+</header>
+
+<nav>
+    <a href="#inicio">INÍCIO</a>
+    <a href="#colecao">COLEÇÃO</a>
+    <a href="#sobre">SOBRE NÓS</a>
+    <a href="#pedidos">ENCOMENDAS</a>
+</nav>
+
+<div class="hero">
+    <span>THE ART OF SWEET MOMENTS</span>
+
+    <h1>
+        Momentos especiais merecem sabores inesquecíveis.
+    </h1>
+
+    <p>
+        Tortas artesanais que transformam pequenos
+        momentos em doces memórias.
+    </p>
+
+    <a class="button" href="#colecao">
+        CONHEÇA NOSSA COLEÇÃO
+    </a>
+</div>
+
+<section id="colecao">
+    <h2 class="section-title">The Bliss Collection</h2>
+
+    <p class="subtitle">
+        Uma experiência especial para cada ocasião.
+    </p>
+
+    <div class="products">
+
+        <article class="product">
+            <div class="product-image">B</div>
+            <h3>Mini Bliss</h3>
+            <p>
+                Um pequeno momento de felicidade.
+                <br>10 × 5 × 5 cm
+            </p>
+            <span class="price">Em breve</span>
+        </article>
+
+        <article class="product">
+            <div class="product-image">B</div>
+            <h3>Medium Bliss</h3>
+            <p>
+                Perfeita para compartilhar.
+                <br>15 × 10 × 5 cm
+            </p>
+            <span class="price">Em breve</span>
+        </article>
+
+        <article class="product">
+            <div class="product-image">B</div>
+            <h3>Family Bliss</h3>
+            <p>
+                Para celebrar momentos especiais.
+                <br>31 × 14 × 5 cm
+                <br>Aproximadamente 15 porções
+            </p>
+            <span class="price">Em breve</span>
+        </article>
+
+    </div>
+</section>
+
+<section class="about" id="sobre">
+    <h2 class="section-title">Our Story</h2>
+
+    <p>
+        A Bliss Atelier nasceu do desejo de transformar
+        o carinho em experiências doces e memoráveis.
+        Cada detalhe é pensado para tornar suas
+        celebrações ainda mais especiais.
+    </p>
+
+    <div class="tagline">
+        Made with grace, shared with love.
+    </div>
+</section>
+
+<section class="orders" id="pedidos">
+    <h2 class="section-title">Encomendas</h2>
+
+    <p class="subtitle">
+        Produção artesanal, feita especialmente para você.
+    </p>
+
+    <p>
+        Encomendas com antecedência mínima de 24 horas.
+        <br>
+        Entrega ou retirada em Taubaté, SP.
+        <br>
+        Disponibilidade mediante confirmação.
+        <br>
+        50% via Pix para confirmação da encomenda.
+        <br>
+        50% na entrega ou retirada.
+    </p>
+
+    <p style="margin-top:25px;color:#641F35">
+        Nossa loja estará disponível em breve.
+    </p>
+</section>
+
+<footer>
+    <h2>BLISS ATELIER</h2>
+
+    <p>Made with grace, shared with love.</p>
+    <p>Taubaté • São Paulo • Brasil</p>
+    <p>© 2026 Bliss Atelier</p>
+</footer>
+
+</body>
+</html>
