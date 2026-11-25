@@ -1,11 +1,1144 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bliss Atelier | Confeitaria Artesanal</title><link rel="icon" href="logo.png"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head><body>
-<div class="announcement">CONFEITARIA ARTESANAL • TAUBATÉ, SP</div><header id="inicio"><img class="brand-logo" src="logo.png" alt="Bliss Atelier – Confeitaria Artesanal"><p class="tagline">Made with grace, shared with love.</p></header>
-<nav><a href="#inicio">INÍCIO</a><a href="#colecao">COLEÇÃO</a><a href="#sobre">SOBRE NÓS</a><a href="#pedidos">ENCOMENDAS</a><button id="bagButton" class="bag">Sacola (<span id="count">0</span>)</button></nav>
-<main><div class="hero"><span>THE ART OF SWEET MOMENTS</span><h1>Momentos especiais merecem sabores inesquecíveis.</h1><p>Tortas artesanais que transformam pequenos momentos em doces memórias.</p><a class="button" href="#colecao">CONHEÇA NOSSA COLEÇÃO</a></div>
-<section id="colecao"><h2>The Bliss Collection</h2><p class="subtitle">Uma experiência especial para cada ocasião.</p><div class="products" id="products"></div></section>
-<section class="about" id="sobre"><h2>Our Story</h2><p>A Bliss Atelier nasceu do desejo de transformar o carinho em experiências doces e memoráveis. Cada detalhe é pensado para tornar suas celebrações ainda mais especiais.</p><p class="tagline">Made with grace, shared with love.</p></section>
-<section id="pedidos"><h2>Encomendas</h2><p>Produção artesanal, feita especialmente para você.</p><p>Encomendas com antecedência mínima de 24 horas.<br>Entrega ou retirada em Taubaté, SP.<br>Disponibilidade mediante confirmação.<br>50% via Pix após confirmação de disponibilidade.<br>50% na entrega ou retirada.</p><p>Catálogo em preparação. Pedidos ainda indisponíveis.</p></section></main>
-<footer><h2>BLISS ATELIER</h2><p>Made with grace, shared with love.</p><p>Taubaté • São Paulo • Brasil</p><p>© 2026 Bliss Atelier</p></footer>
-<dialog id="custom"><div class="dialoghead"><h2 id="productTitle"></h2><button class="close" data-close="custom" aria-label="Fechar">×</button></div><p id="dimensions"></p><form id="customForm"><label for="cover">01 — Cobertura</label><select id="cover"><option>Ganache de chocolate ao leite</option><option>Ganache de chocolate meio amargo</option></select><label>02 — Decoração</label><div id="decorations" class="decorations"></div><label for="qty">03 — Quantidade</label><input id="qty" type="number" min="1" max="99" step="1" value="1" required><p id="estimate" aria-live="polite"></p><button class="primary" type="submit">ADICIONAR À SACOLA</button></form></dialog>
-<dialog id="bagDialog"><div class="dialoghead"><h2>Minha sacola</h2><button class="close" data-close="bagDialog" aria-label="Fechar">×</button></div><div id="items"></div><p id="total"></p><p class="note">Valores provisórios. Entrega não incluída. Nenhum pedido será enviado nesta etapa.</p><button class="primary" data-close="bagDialog">CONTINUAR ESCOLHENDO</button></dialog>
-</body></html>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Bliss Atelier | Confeitaria Artesanal</title>
+
+<link rel="icon" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --bordeaux: #641F35;
+    --champagne: #E8D5B5;
+    --ivory: #F7F0E5;
+    --gold: #B58B53;
+    --chocolate: #38231F;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--chocolate);
+    font: 14px/1.8 Montserrat, sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0 0 18px;
+}
+
+h2 {
+    font-size: 44px;
+    color: var(--bordeaux);
+}
+
+h3 {
+    font-size: 32px;
+    color: var(--bordeaux);
+}
+
+/* BARRA SUPERIOR */
+
+.announcement {
+    background: var(--bordeaux);
+    color: var(--champagne);
+    text-align: center;
+    padding: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+/* CABEÇALHO */
+
+header {
+    text-align: center;
+    padding: 30px 20px 25px;
+}
+
+.brand-logo {
+    display: block;
+    width: 420px;
+    max-width: 90%;
+    height: auto;
+    margin: auto;
+}
+
+.tagline {
+    font: italic 20px 'Cormorant Garamond', Georgia, serif;
+    color: var(--gold);
+    margin: 18px 0 0;
+}
+
+/* MENU */
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 20px;
+    border-block: 1px solid var(--champagne);
+}
+
+nav a, .bag {
+    color: var(--bordeaux);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.bag {
+    background: none;
+    border: 1px solid var(--bordeaux);
+    padding: 8px 14px;
+}
+
+/* APRESENTAÇÃO */
+
+.hero {
+    text-align: center;
+    background: var(--bordeaux);
+    color: var(--ivory);
+    padding: 100px 25px;
+}
+
+.hero span {
+    color: var(--champagne);
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 6vw, 68px);
+    max-width: 800px;
+    margin: 25px auto;
+}
+
+.hero p {
+    max-width: 550px;
+    margin: auto;
+}
+
+/* BOTÕES */
+
+.button, .primary {
+    display: inline-block;
+    background: var(--champagne);
+    color: var(--bordeaux);
+    padding: 16px 24px;
+    border: 0;
+    text-decoration: none;
+    font: 500 12px Montserrat, sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background .25s, color .25s;
+}
+
+.button {
+    margin-top: 30px;
+}
+
+.primary {
+    background: var(--bordeaux);
+    color: white;
+    width: 100%;
+}
+
+.primary:hover, .button:hover {
+    background: var(--gold);
+    color: white;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* CATÁLOGO */
+
+section {
+    text-align: center;
+    padding: 75px 25px;
+}
+
+.subtitle {
+    margin: 15px auto 40px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.product {
+    background: #fffdf8;
+    border: 1px solid var(--champagne);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform .3s, box-shadow .3s;
+}
+
+/* ANIMAÇÃO DOS PRODUTOS */
+
+.product:hover,
+.product:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(100, 31, 53, .12);
+}
+
+.product-image {
+    height: 180px;
+    width: 100%;
+    background: var(--ivory);
+    display: grid;
+    place-items: center;
+    margin-bottom: 25px;
+}
+
+.product-image img {
+    width: 85%;
+    max-height: 160px;
+    object-fit: contain;
+}
+
+.product p {
+    margin: 8px 0 20px;
+}
+
+.product .primary {
+    margin-top: auto;
+}
+
+.price {
+    color: var(--bordeaux);
+    margin: 10px 0 20px;
+    font-weight: 600;
+}
+
+/* SOBRE NÓS */
+
+.about {
+    background: var(--champagne);
+}
+
+.about p {
+    max-width: 650px;
+    margin: 20px auto;
+}
+
+.about .tagline {
+    color: var(--bordeaux);
+}
+
+/* RODAPÉ */
+
+footer {
+    text-align: center;
+    background: var(--bordeaux);
+    color: var(--champagne);
+    padding: 45px 20px;
+}
+
+footer h2 {
+    color: inherit;
+    font-size: 35px;
+    letter-spacing: 5px;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+/* JANELAS DE PERSONALIZAÇÃO */
+
+dialog {
+    width: min(620px, 94vw);
+    max-height: 90vh;
+    overflow: auto;
+    background: var(--ivory);
+    color: var(--chocolate);
+    border: 1px solid var(--champagne);
+    padding: 25px;
+}
+
+dialog::backdrop {
+    background: #38231f99;
+}
+
+.dialoghead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.dialoghead h2 {
+    font-size: 36px;
+}
+
+.close {
+    border: 0;
+    background: none;
+    color: var(--bordeaux);
+    font-size: 32px;
+    line-height: 1;
+}
+
+form > label {
+    display: block;
+    font-weight: 600;
+    color: var(--bordeaux);
+    margin: 18px 0 8px;
+}
+
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--gold);
+    background: white;
+    font: inherit;
+    color: inherit;
+}
+
+/* DECORAÇÕES */
+
+.decorations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.decor {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    border: 1px solid var(--champagne);
+    padding: 10px;
+    background: #fffdf8;
+    cursor: pointer;
+}
+
+.decor:has(input:checked) {
+    background: var(--champagne);
+    border-color: var(--bordeaux);
+}
+
+.decor input {
+    accent-color: var(--bordeaux);
+}
+
+.decor small {
+    display: block;
+}
+
+/* SACOLA */
+
+.item {
+    border-bottom: 1px solid var(--champagne);
+    padding: 14px 0;
+}
+
+.item button {
+    background: none;
+    border: 1px solid var(--bordeaux);
+    color: var(--bordeaux);
+    padding: 6px 10px;
+}
+
+.note {
+    font-size: 12px;
+}
+
+#total, #estimate {
+    font-weight: 600;
+    color: var(--bordeaux);
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 25px 15px;
+    }
+
+    .brand-logo {
+        width: 340px;
+    }
+
+    .hero {
+        padding: 65px 20px;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    nav a {
+        font-size: 10px;
+    }
+
+    section {
+        padding: 50px 20px;
+    }
+
+    h2 {
+        font-size: 36px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    dialog {
+        padding: 16px;
+    }
+
+    .decorations {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BARRA SUPERIOR -->
+
+<div class="announcement">
+    CONFEITARIA ARTESANAL • TAUBATÉ, SP
+</div>
+
+<!-- LOGO OFICIAL -->
+
+<header id="inicio">
+
+    <img
+        class="brand-logo"
+        src="logo.png"
+        alt="Bliss Atelier - Confeitaria Artesanal"
+    >
+
+    <p class="tagline">
+        Made with grace, shared with love.
+    </p>
+
+</header>
+
+<!-- MENU -->
+
+<nav>
+
+    <a href="#inicio">INÍCIO</a>
+
+    <a href="#colecao">COLEÇÃO</a>
+
+    <a href="#sobre">SOBRE NÓS</a>
+
+    <a href="#pedidos">ENCOMENDAS</a>
+
+    <button id="bagButton" class="bag">
+        Sacola (<span id="count">0</span>)
+    </button>
+
+</nav>
+
+<main>
+
+<!-- APRESENTAÇÃO -->
+
+<div class="hero">
+
+    <span>THE ART OF SWEET MOMENTS</span>
+
+    <h1>
+        Momentos especiais merecem sabores inesquecíveis.
+    </h1>
+
+    <p>
+        Tortas artesanais que transformam pequenos
+        momentos em doces memórias.
+    </p>
+
+    <a class="button" href="#colecao">
+        CONHEÇA NOSSA COLEÇÃO
+    </a>
+
+</div>
+
+<!-- CATÁLOGO -->
+
+<section id="colecao">
+
+    <h2>The Bliss Collection</h2>
+
+    <p class="subtitle">
+        Uma experiência especial para cada ocasião.
+    </p>
+
+    <div class="products" id="products"></div>
+
+</section>
+
+<!-- SOBRE NÓS -->
+
+<section class="about" id="sobre">
+
+    <h2>Our Story</h2>
+
+    <p>
+        A Bliss Atelier nasceu do desejo de transformar
+        o carinho em experiências doces e memoráveis.
+        Cada detalhe é pensado para tornar suas
+        celebrações ainda mais especiais.
+    </p>
+
+    <p class="tagline">
+        Made with grace, shared with love.
+    </p>
+
+</section>
+
+<!-- ENCOMENDAS -->
+
+<section id="pedidos">
+
+    <h2>Encomendas</h2>
+
+    <p>
+        Produção artesanal, feita especialmente para você.
+    </p>
+
+    <p>
+        Encomendas com antecedência mínima de 24 horas.
+        <br>
+        Entrega ou retirada em Taubaté, SP.
+        <br>
+        Disponibilidade mediante confirmação.
+        <br>
+        50% via Pix após confirmação de disponibilidade.
+        <br>
+        50% na entrega ou retirada.
+    </p>
+
+    <p>
+        Catálogo em preparação. Pedidos ainda indisponíveis.
+    </p>
+
+</section>
+
+</main>
+
+<!-- RODAPÉ -->
+
+<footer>
+
+    <h2>BLISS ATELIER</h2>
+
+    <p>Made with grace, shared with love.</p>
+
+    <p>Taubaté • São Paulo • Brasil</p>
+
+    <p>© 2026 Bliss Atelier</p>
+
+</footer>
+
+<!-- JANELA DE PERSONALIZAÇÃO -->
+
+<dialog id="custom">
+
+    <div class="dialoghead">
+
+        <h2 id="productTitle"></h2>
+
+        <button
+            class="close"
+            data-close="custom"
+            aria-label="Fechar"
+        >×</button>
+
+    </div>
+
+    <p id="dimensions"></p>
+
+    <form id="customForm">
+
+        <label for="cover">
+            01 — Cobertura
+        </label>
+
+        <select id="cover">
+
+            <option>
+                Ganache de chocolate ao leite
+            </option>
+
+            <option>
+                Ganache de chocolate meio amargo
+            </option>
+
+        </select>
+
+        <label>
+            02 — Decoração
+        </label>
+
+        <div
+            id="decorations"
+            class="decorations"
+        ></div>
+
+        <label for="qty">
+            03 — Quantidade
+        </label>
+
+        <input
+            id="qty"
+            type="number"
+            min="1"
+            max="99"
+            step="1"
+            value="1"
+            required
+        >
+
+        <p id="estimate" aria-live="polite"></p>
+
+        <button class="primary" type="submit">
+            ADICIONAR À SACOLA
+        </button>
+
+    </form>
+
+</dialog>
+
+<!-- JANELA DA SACOLA -->
+
+<dialog id="bagDialog">
+
+    <div class="dialoghead">
+
+        <h2>Minha sacola</h2>
+
+        <button
+            class="close"
+            data-close="bagDialog"
+            aria-label="Fechar"
+        >×</button>
+
+    </div>
+
+    <div id="items"></div>
+
+    <p id="total"></p>
+
+    <p class="note">
+        Valores provisórios. Entrega não incluída.
+        Nenhum pedido será enviado nesta etapa.
+    </p>
+
+    <button
+        class="primary"
+        data-close="bagDialog"
+    >
+        CONTINUAR ESCOLHENDO
+    </button>
+
+</dialog>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+'use strict';
+
+/* PRODUTOS */
+
+const products = [
+
+    {
+        id: 'mini',
+        name: 'Mini Bliss',
+        dimensions: '10 × 5 × 5 cm',
+        description: 'Um pequeno momento de felicidade.'
+    },
+
+    {
+        id: 'medium',
+        name: 'Medium Bliss',
+        dimensions: '15 × 10 × 5 cm',
+        description: 'Perfeita para compartilhar.'
+    },
+
+    {
+        id: 'family',
+        name: 'Family Bliss',
+        dimensions: '31 × 14 × 5 cm · Aproximadamente 15 porções',
+        description: 'Para celebrar momentos especiais.'
+    }
+
+];
+
+/* DECORAÇÕES PROVISÓRIAS */
+
+const decorations = [
+
+    ['Classic Bliss', 'Ganache tradicional'],
+
+    ['Starry Christmas', 'Estrelas de chocolate'],
+
+    ['Golden Christmas', 'Árvore e detalhes dourados'],
+
+    ['Strawberry Bliss', 'Morangos'],
+
+    ['Cherry Elegance', 'Cerejas'],
+
+    ['Nutty Bliss', 'Nozes']
+
+];
+
+/* FUNÇÕES AUXILIARES */
+
+const $ = id => document.getElementById(id);
+
+const money = n => n.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+});
+
+/* PREÇOS PROVISÓRIOS */
+
+const price = (id, decor) =>
+    id === 'family' && decor === 'Classic Bliss'
+        ? 119.90
+        : null;
+
+/* RECUPERAR SACOLA SALVA */
+
+let cart = [];
+
+try {
+
+    const saved = JSON.parse(
+        localStorage.getItem('bliss-cart-v1') || '[]'
+    );
+
+    if (Array.isArray(saved)) {
+
+        cart = saved.filter(x =>
+            x &&
+            products.some(p => p.id === x.id) &&
+            decorations.some(d => d[0] === x.decor) &&
+            Array.from($('cover').options).some(
+                o => o.value === x.cover
+            ) &&
+            Number.isInteger(x.qty) &&
+            x.qty >= 1 &&
+            x.qty <= 99
+        );
+
+    }
+
+} catch (e) {
+    cart = [];
+}
+
+let active = null;
+
+/* CRIAR ELEMENTOS */
+
+function node(tag, text, cls) {
+
+    const el = document.createElement(tag);
+
+    if (text !== undefined) {
+        el.textContent = text;
+    }
+
+    if (cls) {
+        el.className = cls;
+    }
+
+    return el;
+}
+
+/* SALVAR SACOLA */
+
+function save() {
+
+    try {
+
+        localStorage.setItem(
+            'bliss-cart-v1',
+            JSON.stringify(cart)
+        );
+
+    } catch (e) {}
+
+    renderCart();
+}
+
+/* CRIAR VITRINE */
+
+for (const p of products) {
+
+    const card = node(
+        'article',
+        undefined,
+        'product'
+    );
+
+    const image = node(
+        'div',
+        undefined,
+        'product-image'
+    );
+
+    const logo = node('img');
+
+    logo.src = 'logo.png';
+
+    logo.alt = 'Imagem provisória da marca';
+
+    image.append(logo);
+
+    const b = node(
+        'button',
+        'PERSONALIZAR MINHA TORTA',
+        'primary'
+    );
+
+    b.addEventListener('click', () => {
+        openProduct(p);
+    });
+
+    card.append(
+
+        image,
+
+        node('h3', p.name),
+
+        node('p', p.description),
+
+        node('p', p.dimensions),
+
+        node(
+            'p',
+            p.id === 'family'
+                ? 'Classic: R$ 119,90 (provisório)'
+                : 'A consultar',
+            'price'
+        ),
+
+        b
+
+    );
+
+    $('products').append(card);
+}
+
+/* CRIAR OPÇÕES DE DECORAÇÃO */
+
+for (const [i, d] of decorations.entries()) {
+
+    const label = node(
+        'label',
+        undefined,
+        'decor'
+    );
+
+    const radio = node('input');
+
+    radio.type = 'radio';
+
+    radio.name = 'decoration';
+
+    radio.value = d[0];
+
+    radio.defaultChecked = i === 0;
+
+    radio.checked = i === 0;
+
+    radio.required = true;
+
+    const content = node('span', d[0]);
+
+    content.append(
+        node('small', d[1])
+    );
+
+    label.append(radio, content);
+
+    $('decorations').append(label);
+}
+
+/* IDENTIFICAR DECORAÇÃO SELECIONADA */
+
+function chosen() {
+
+    return (
+
+        document.querySelector(
+            'input[name="decoration"]:checked'
+        )
+
+        ||
+
+        document.querySelector(
+            'input[name="decoration"]'
+        )
+
+    ).value;
+
+}
+
+/* ATUALIZAR PREÇO */
+
+function update() {
+
+    if (!active) return;
+
+    const q = Number($('qty').value);
+
+    const p = price(active.id, chosen());
+
+    $('estimate').textContent =
+
+        p === null
+
+        ? 'Valor a consultar'
+
+        : Number.isInteger(q) &&
+          q >= 1 &&
+          q <= 99
+
+        ? `Subtotal provisório: ${money(p * q)}`
+
+        : 'Informe uma quantidade válida';
+
+}
+
+/* ABRIR PERSONALIZAÇÃO */
+
+function openProduct(p) {
+
+    active = p;
+
+    $('customForm').reset();
+
+    $('productTitle').textContent = p.name;
+
+    $('dimensions').textContent = p.dimensions;
+
+    update();
+
+    $('custom').showModal();
+
+}
+
+/* ATUALIZAR FORMULÁRIO */
+
+$('customForm').addEventListener(
+    'input',
+    update
+);
+
+$('customForm').addEventListener(
+    'change',
+    update
+);
+
+/* ADICIONAR À SACOLA */
+
+$('customForm').addEventListener('submit', e => {
+
+    e.preventDefault();
+
+    if (
+        !active ||
+        !$('customForm').reportValidity()
+    ) return;
+
+    cart.push({
+
+        id: active.id,
+
+        cover: $('cover').value,
+
+        decor: chosen(),
+
+        qty: Number($('qty').value)
+
+    });
+
+    save();
+
+    $('custom').close();
+
+    $('bagDialog').showModal();
+
+});
+
+/* EXIBIR SACOLA */
+
+function renderCart() {
+
+    $('count').textContent = cart.reduce(
+        (n, x) => n + x.qty,
+        0
+    );
+
+    $('items').replaceChildren();
+
+    let total = 0;
+
+    let unknown = false;
+
+    cart.forEach((x, i) => {
+
+        const p = products.find(
+            p => p.id === x.id
+        );
+
+        const unit = price(x.id, x.decor);
+
+        if (unit === null) {
+
+            unknown = true;
+
+        } else {
+
+            total += unit * x.qty;
+
+        }
+
+        const row = node(
+            'div',
+            undefined,
+            'item'
+        );
+
+        const remove = node(
+            'button',
+            'Remover'
+        );
+
+        remove.addEventListener('click', () => {
+
+            cart.splice(i, 1);
+
+            save();
+
+        });
+
+        row.append(
+
+            node(
+                'strong',
+                `${x.qty} × ${p.name}`
+            ),
+
+            node('div', x.cover),
+
+            node('div', x.decor),
+
+            node(
+                'p',
+                unit === null
+                    ? 'A consultar'
+                    : money(unit * x.qty)
+            ),
+
+            remove
+
+        );
+
+        $('items').append(row);
+
+    });
+
+    if (!cart.length) {
+
+        $('items').append(
+            node('p', 'Sua sacola está vazia.')
+        );
+
+    }
+
+    $('total').textContent = unknown
+
+        ? `Subtotal dos itens com preço: ${money(total)} + itens a consultar`
+
+        : `Subtotal provisório: ${money(total)}`;
+
+}
+
+/* ABRIR SACOLA */
+
+$('bagButton').addEventListener('click', () => {
+
+    renderCart();
+
+    $('bagDialog').showModal();
+
+});
+
+/* FECHAR JANELAS */
+
+document.querySelectorAll('[data-close]').forEach(b => {
+
+    b.addEventListener('click', () => {
+
+        $(b.dataset.close).close();
+
+    });
+
+});
+
+/* INICIAR LOJA */
+
+renderCart();
+
+</script>
+
+</body>
+</html>
